@@ -10,7 +10,7 @@ namespace QualityCheckDemo.Tests
         {
             int result = Calculator.Add(1, 2);
 
-            Assert.AreEqual(3, result);
+            Assert.AreEqual(30, result);
         }
 
         [TestMethod]
