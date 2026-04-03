@@ -30,11 +30,11 @@ namespace QualityCheckDemo.Tests
         }
 
         [TestMethod]
-        public void Add_10Plus10_Returns20()
+        public void Add_10Plus15_Returns25()
         {
-            int result = Calculator.Add(10, 10);
+            int result = Calculator.Add(10, 15);
 
-            Assert.AreEqual(20, result);
+            Assert.AreEqual(25, result);
         }
     }
 }
