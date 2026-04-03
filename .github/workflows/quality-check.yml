@@ -39,14 +39,20 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore QualityCheckDemo.sln
 
-      - name: Run tests
+      - name: Run tests with coverage
         run: dotnet test tests/QualityCheckDemo.Tests/QualityCheckDemo.Tests.csproj --configuration Release --no-restore --collect:"XPlat Code Coverage" --results-directory coverage
 
-      - name: Upload test report
+      - name: Install ReportGenerator
+        run: dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.29
+
+      - name: Generate HTML coverage report
+        run: reportgenerator -reports:coverage/**/*.xml -targetdir:coverage/html -reporttypes:Html
+
+      - name: Upload coverage report artifact
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: coverage/
+          path: coverage/html
 
   lint:
     runs-on: ubuntu-latest
@@ -71,7 +77,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Use secret
-        run: echo "Using secret token"
+      - name: Validate secret exists
+        run: |
+          if [ -z "$API_TOKEN" ]; then
+            echo "API_TOKEN is missing"
+            exit 1
+          fi
+
+          echo "Secret found"
         env:
           API_TOKEN: ${{ secrets.API_TOKEN }}
