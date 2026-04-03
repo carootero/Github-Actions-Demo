@@ -28,5 +28,13 @@ namespace QualityCheckDemo.Tests
 
             Assert.AreEqual(15, result);
         }
+
+        [TestMethod]
+        public void Add_10Plus10_Returns20()
+        {
+            int result = Calculator.Add(10, 10);
+
+            Assert.AreEqual(20, result);
+        }
     }
 }
