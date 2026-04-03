@@ -8,7 +8,7 @@ namespace QualityCheckDemo.Tests
         [TestMethod]
         public void Add_1Plus2_Returns3()
         {
-            int result = Calculator.Add(1, 2);
+            int      result = Calculator.Add(1, 2);
 
             Assert.AreEqual(3, result);
         }
